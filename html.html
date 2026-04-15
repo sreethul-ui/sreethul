@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sreethul Resume</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --text: #f5f5f7;
+      --card: #1c1c1e;
+      --accent: #0a84ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px;
+      transform: translateY(40px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    header.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 25px rgba(10,132,255,0.6);
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    section {
+      background: var(--card);
+      margin: 40px 0;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      transform: translateY(60px) scale(0.95);
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+
+    section.show {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    section:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 10px 40px rgba(10,132,255,0.4);
+    }
+
+    h2 {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      margin: 10px;
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      opacity: 0.8;
+    }
+
+    .contact-item {
+      margin: 10px 0;
+    }
+
+    .socials a {
+      margin-right: 15px;
+      font-size: 22px;
+      color: var(--accent);
+    }
+
+    /* Mobile Optimization */
+    @media(max-width:600px){
+      h1{
+        font-size: 1.8rem;
+      }
+      section{
+        padding: 18px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header id="hero">
+  <img src="me.jpeg" class="profile-pic" />
+  <h1>SREETHUL SREENIVAS P</h1>
+  <p>Tool Maker | Mould & Die Specialist | CNC Machining</p>
+  <button class="btn" onclick="downloadPDF()">Download Resume</button>
+</header>
+
+<div class="container" id="resume">
+
+  <section class="reveal">
+    <h2>Profile</h2>
+    <p>
+      Skilled Tool Maker with hands-on experience in mould manufacturing, CNC operations, and precision machining. 
+      Proven ability to maintain tight tolerances, improve production efficiency, and ensure high-quality standards.
+    </p>
+  </section>
+
+  <section class="reveal">
+    <h2>Skills</h2>
+    <ul>
+      <li>Tool & Die Making</li>
+      <li>Mould Manufacturing</li>
+      <li>CNC Machine Operations</li>
+      <li>Lathe & Drilling Machines</li>
+      <li>Quality Inspection & Finishing</li>
+    </ul>
+  </section>
+
+  <section class="reveal">
+    <h2>Experience</h2>
+    <p><strong>Tool Maker</strong> - Divine Toolings, Pune</p>
+    <ul>
+      <li>Manufactured high-precision mould components with tight tolerances</li>
+      <li>Operated lathe, drilling, and CNC machines to meet production targets</li>
+      <li>Improved workflow efficiency and reduced material waste</li>
+      <li>Ensured strict quality inspection standards</li>
+    </ul>
+  </section>
+
+  <section class="reveal">
+    <h2>Projects</h2>
+    <ul>
+      <li>Worked on mould manufacturing for industrial components</li>
+      <li>Handled machining and finishing processes independently</li>
+    </ul>
+  </section>
+
+  <section class="reveal">
+    <h2>Education</h2>
+    <p>ITI in Tool & Die Making</p>
+  </section>
+
+  <section class="reveal">
+    <h2>Contact</h2>
+    <div class="contact-item"><i class="fas fa-envelope"></i> sreethulsreenivas83@gmail.com</div>
+    <div class="contact-item"><i class="fas fa-phone"></i> 7012032314</div>
+    <div class="socials">
+      <a href="https://wa.me/917012032314"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/sreethul.p"><i class="fab fa-instagram"></i></a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  function downloadPDF() {
+    const element = document.getElementById('resume');
+
+    html2pdf().set({
+      margin: 0.5,
+      filename: 'Sreethul_Resume.pdf',
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    }).from(element).save();
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const hero = document.getElementById('hero');
+
+  function animateOnScroll() {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    reveals.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < triggerBottom) {
+        section.classList.add('show');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', animateOnScroll);
+
+  // FIXED header animation (loads immediately)
+  window.addEventListener('load', () => {
+    hero.classList.add('show');
+    animateOnScroll();
+  });
+
+</script>
+
+</body>
+</html>
